@@ -124,7 +124,6 @@
       var room = r[3] || '';
       var teacher = r[4] || '';
       var cls = 'trow';
-      if (ch.indexOf(pair) >= 0) cls += ' ch';
       if (off.indexOf(pair) >= 0) cls += ' off';
       h += '<div class="' + cls + '">';
       h += '<span class="c-n">' + esc(pair) + '</span>';

@@ -408,18 +408,6 @@ html[data-theme=light] .gcard:hover { border-color: #bdbdbd; }
 .c-s .tt { display: block; margin-top: 3px; font-size: 11.5px; font-weight: 500; line-height: 1.35; color: var(--muted); }
 .c-r { font-size: 13px; line-height: 1.35; color: var(--muted); }
 
-.trow.ch { position: relative; }
-.trow.ch::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 9px;
-  bottom: 9px;
-  width: 2px;
-  border-radius: 2px;
-  background: var(--accent);
-  z-index: 1;
-}
 .trow.off .c-s { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 1px; }
 
 .tbl.no-time .trow { grid-template-columns: 2.3rem minmax(0, 1fr) minmax(3.2rem, 19%); }
