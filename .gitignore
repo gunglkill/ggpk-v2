@@ -1,0 +1,10 @@
+# локальные секреты и служебные файлы — в репозиторий не попадают
+.secrets/
+.venv/
+site/
+tools/out/
+__pycache__/
+*.pyc
+app/build/
+app/keystore.jks
+tools/shots/
