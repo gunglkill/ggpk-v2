@@ -6,7 +6,8 @@ $JDK = 'F:\AndroidBuild\jdk\jdk17.0.20_12'
 $env:JAVA_HOME = $JDK
 $env:PATH = "$JDK\bin;$env:PATH"
 
-$APP = 'C:\Users\N1zelix\AppData\Roaming\AutoClaw-oversea-official\accounts\a70b9889721dd7b4333ec1fabf4c04adf6de9528f3ea4d6e20a83a727d0f91b5\projects\Default\cloud\app'
+$APP = Split-Path -Parent $MyInvocation.MyCommand.Path
+if (-not $APP) { $APP = $PSScriptRoot }
 Set-Location $APP
 
 $OUT = "$APP\out"
@@ -21,7 +22,7 @@ Write-Host 'step 1: aapt2 compile'
 if ($LASTEXITCODE -ne 0) { throw 'aapt2 compile failed' }
 
 Write-Host 'step 2: aapt2 link'
-& "$BT\aapt2.exe" link -o "$OUT\base.apk" -I $PLATFORM --manifest AndroidManifest.xml -R "$OUT\res.zip" --java "$OUT\gen" --min-sdk-version 26 --target-sdk-version 34 --version-code 1 --version-name 1.0 --auto-add-overlay
+& "$BT\aapt2.exe" link -o "$OUT\base.apk" -I $PLATFORM --manifest AndroidManifest.xml -R "$OUT\res.zip" --java "$OUT\gen" --min-sdk-version 26 --target-sdk-version 34 --auto-add-overlay
 if ($LASTEXITCODE -ne 0) { throw 'aapt2 link failed' }
 
 Write-Host 'step 3: javac'

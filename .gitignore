@@ -8,3 +8,8 @@ __pycache__/
 app/build/
 app/keystore.jks
 tools/shots/
+
+app/out/
+app/ggpk.jks
+*.apk
+*.idsig

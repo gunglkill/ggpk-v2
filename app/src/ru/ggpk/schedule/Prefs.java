@@ -86,6 +86,22 @@ public final class Prefs {
         return get(c).getString("prefetch_day", "");
     }
 
+    public static String ghToken(Context c) {
+        return get(c).getString("gh_token", "");
+    }
+
+    public static void setGhToken(Context c, String v) {
+        get(c).edit().putString("gh_token", v == null ? "" : v.trim()).apply();
+    }
+
+    public static String published(Context c) {
+        return get(c).getString("published", "");
+    }
+
+    public static void setPublished(Context c, String v) {
+        get(c).edit().putString("published", v).apply();
+    }
+
     public static void setPrefetchDay(Context c, String v) {
         get(c).edit().putString("prefetch_day", v).apply();
     }

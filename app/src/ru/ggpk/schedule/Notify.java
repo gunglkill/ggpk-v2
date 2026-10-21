@@ -30,7 +30,7 @@ import java.util.Locale;
  */
 public final class Notify {
 
-    static final String BASE = "https://gunglkill.github.io/ggpk/data/g/";
+    static final String BASE = "https://gunglkill.github.io/ggpk-v2/data/g/";
     private static final int MAX_ALARMS = 60;
 
     private Notify() {
@@ -275,7 +275,7 @@ public final class Notify {
     }
 
     // ---------- проверка нового расписания ----------
-    static final String VERSION_URL = "https://gunglkill.github.io/ggpk/version.txt";
+    static final String VERSION_URL = "https://gunglkill.github.io/ggpk-v2/version.txt";
 
     /** Раз в полчаса: если метка сборки на сайте изменилась — пуш о новом расписании. */
     static void checkUpdate(final Context ctx, final Runnable done) {

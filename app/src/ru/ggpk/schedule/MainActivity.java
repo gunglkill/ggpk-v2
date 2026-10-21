@@ -28,7 +28,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-    private static final String START_URL = "https://gunglkill.github.io/ggpk/";
+    private static final String START_URL = "https://gunglkill.github.io/ggpk-v2/";
     private static final int BG = 0xFF000000;
 
     private WebView web;
@@ -83,7 +83,7 @@ public class MainActivity extends Activity {
     private static final String PREFETCH_JS =
             "(function(){try{" +
             "if(!('caches' in window)){Android.prefetchDone('нет кеша');return;}" +
-            "var BASE='/ggpk/',CACHE='ggpk-v1';" +
+            "var BASE='/ggpk-v2/',CACHE='ggpk-v2';" +
             "var done=0,bytes=0,list=[],seen={};" +
             "function norm(u){var a=document.createElement('a');a.href=u;return a.origin+a.pathname;}" +
             "function getText(u){return fetch(u,{cache:'reload'}).then(function(r){return r.text();});}" +
@@ -284,7 +284,7 @@ public class MainActivity extends Activity {
         if (size == null || size.isEmpty()) size = "—";
         String js = "(function(){try{"
                 + "var p=location.pathname;"
-                + "if(p.indexOf('index.html')<0 && p.slice(-6)!=='/ggpk/')return;"
+                + "if(p.indexOf('index.html')<0 && p.indexOf('/ggpk-v2/')<0)return;"
                 + "var rows=document.querySelector('.rows');"
                 + "if(!rows||document.getElementById('dlall'))return;"
                 + "var a=document.createElement('a');"

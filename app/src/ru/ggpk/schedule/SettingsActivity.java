@@ -208,6 +208,34 @@ public class SettingsActivity extends Activity {
         drawSounds();
         root.addView(soundCard);
 
+        // публикация изменений (ВК → GitHub)
+        LinearLayout pubCard = (LinearLayout) card();
+        pubCard.addView(title("Публикация изменений"));
+        pubCard.addView(note("Забирает с сообщества ВК основной файл и изменения на сегодня "
+                + "и завтра, и загружает их на сайт. Требуется ключ GitHub (PAT, scope repo)."));
+        LinearLayout pubRow = new LinearLayout(this);
+        pubRow.setOrientation(LinearLayout.HORIZONTAL);
+        LinearLayout.LayoutParams prp = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        prp.topMargin = dp(10);
+        pubRow.setLayoutParams(prp);
+        Button patBtn = chip(Prefs.ghToken(this).isEmpty()
+                ? "Указать ключ GitHub" : "Ключ GitHub ✓",
+                !Prefs.ghToken(this).isEmpty(), new View.OnClickListener() {
+            public void onClick(View v) {
+                askToken();
+            }
+        });
+        pubRow.addView(patBtn);
+        Button pubBtn = chip("Публиковать", false, new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(SettingsActivity.this, PublishActivity.class));
+            }
+        });
+        pubRow.addView(pubBtn);
+        pubCard.addView(pubRow);
+        root.addView(pubCard);
+
         // кнопки
         Button test = chip("Проверить уведомление", false, new View.OnClickListener() {
             public void onClick(View v) {
@@ -289,6 +317,43 @@ public class SettingsActivity extends Activity {
         }
         b.setBackground(bg);
         b.setPadding(0, dp(13), 0, dp(13));
+    }
+
+    private void askToken() {
+        final android.widget.EditText input = new android.widget.EditText(this);
+        input.setInputType(android.text.InputType.TYPE_CLASS_TEXT
+                | android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        input.setTextSize(14);
+        input.setTextColor(TEXT);
+        input.setHint("ghp_…");
+        input.setHintTextColor(MUTED);
+        String cur = Prefs.ghToken(this);
+        if (!cur.isEmpty()) input.setText(cur);
+        input.setPadding(dp(18), dp(14), dp(18), dp(14));
+        GradientDrawable ib = new GradientDrawable();
+        ib.setColor(0xFF151515);
+        ib.setCornerRadius(dp(10));
+        ib.setStroke(dp(1), LINE);
+        input.setBackground(ib);
+
+        LinearLayout wrap = new LinearLayout(this);
+        wrap.setOrientation(LinearLayout.VERTICAL);
+        wrap.setPadding(dp(20), dp(14), dp(20), dp(6));
+        wrap.addView(input);
+
+        new AlertDialog.Builder(this)
+                .setTitle("Ключ GitHub")
+                .setMessage("Персональный токен с правом записи в ggpk-v2 "
+                        + "(classic PAT, scope: repo). Хранится только в приложении.")
+                .setView(wrap)
+                .setPositiveButton("Сохранить", (d, w) -> {
+                    Prefs.setGhToken(SettingsActivity.this,
+                            input.getText() == null ? "" : input.getText().toString());
+                    Toast.makeText(this, "Ключ сохранён", Toast.LENGTH_SHORT).show();
+                    recreate();
+                })
+                .setNegativeButton("Отмена", null)
+                .show();
     }
 
     private void playSound(int idx) {
