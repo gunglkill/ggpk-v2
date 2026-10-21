@@ -408,7 +408,7 @@ html[data-theme=light] .gcard:hover { border-color: #bdbdbd; }
 .c-s .tt { display: block; margin-top: 3px; font-size: 11.5px; font-weight: 500; line-height: 1.35; color: var(--muted); }
 .c-r { font-size: 13px; line-height: 1.35; color: var(--muted); }
 
-.trow.ch { position: relative; background: linear-gradient(90deg, var(--accent-dim), transparent 72%); }
+.trow.ch { position: relative; }
 .trow.ch::before {
   content: '';
   position: absolute;
